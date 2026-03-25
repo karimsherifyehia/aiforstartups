@@ -1,0 +1,181 @@
+---
+// PLACEHOLDER PRICING — REPLACE WITH REAL PRICING
+interface Tier {
+  name: string;
+  tagline: string;
+  price: string;
+  period?: string;
+  featured?: boolean;
+  cta: { text: string; href: string };
+  features: string[];
+}
+
+const tiers: Tier[] = [
+  {
+    name: 'Free',
+    tagline: 'Operations, solved.',
+    price: '$0',
+    period: '/mo',
+    cta: { text: 'Start free', href: 'https://nexus.aiforstartups.io' },
+    features: [
+      '1 store: Shopify or WooCommerce',
+      'Order import & Pick-Pack dashboard',
+      'Print pick lists & packing slips',
+      'Basic customer sync',
+      'Up to 30 orders/day',
+      'New order notifications',
+      'CSV export',
+    ],
+  },
+  {
+    name: 'Pro',
+    tagline: 'CRM, campaigns & analytics.',
+    price: '$79',
+    period: '/mo',
+    featured: true,
+    cta: { text: 'Upgrade to Pro', href: 'https://nexus.aiforstartups.io?plan=pro' },
+    features: [
+      'Unlimited orders',
+      'Multiple stores (Shopify & WooCommerce)',
+      'Advanced CRM: RFM, churn risk, LTV',
+      'Campaign builder (Email / WhatsApp / SMS)',
+      'Smart segments & automation',
+      'Team roles & collaboration',
+      'Issabel, WhatsApp, carrier integrations',
+      'Cohorts, bundles, margin analytics',
+    ],
+  },
+  {
+    name: 'Enterprise',
+    tagline: 'Security, scale & support.',
+    price: "Let's talk",
+    cta: { text: 'Contact sales', href: 'https://wa.me/201040003090' },
+    features: [
+      'White-label & custom branding',
+      'SSO/SAML, audit logs, DPA',
+      'API & webhooks with rate limits',
+      'Dedicated onboarding',
+      '99.9% SLA & priority support',
+    ],
+  },
+];
+---
+
+<section id="pricing" class="py-24">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+    <div class="mb-14 reveal text-center">
+      <span class="section-eyebrow mb-5 inline-block">Pricing</span>
+      <h2 class="section-title">Simple pricing</h2>
+      <p class="section-body mt-3 mx-auto" style="max-width: 46ch;">
+        Start on Free for operations. Upgrade to Pro when you're ready for CRM, campaigns, and analytics.
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-4 items-start reveal-stagger">
+      {tiers.map((tier) => (
+        tier.featured ? (
+          <!-- Featured tier gets double-bezel treatment -->
+          <div class="bezel-card lg:-mt-4">
+            <div class="bezel-inner p-7 flex flex-col gap-6 relative">
+              <!-- Featured badge -->
+              <div
+                class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-bold"
+                style="background: var(--accent); color: white; letter-spacing: 0.04em; white-space: nowrap;"
+              >
+                MOST POPULAR
+              </div>
+
+              <div class="pt-2">
+                <h3 class="font-bold text-xl tracking-tight mb-1" style="color: var(--text-primary);">{tier.name}</h3>
+                <p class="text-sm" style="color: var(--text-secondary);">{tier.tagline}</p>
+              </div>
+
+              <div class="flex items-end gap-1">
+                <span class="font-extrabold text-4xl number-tabular tracking-tight" style="color: var(--text-primary);">{tier.price}</span>
+                {tier.period && <span class="text-sm pb-1" style="color: var(--text-secondary);">{tier.period}</span>}
+              </div>
+
+              <a
+                href={tier.cta.href}
+                class="btn-primary justify-center text-center"
+                style="border-radius: 9999px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {tier.cta.text}
+                <span class="btn-icon">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
+                  </svg>
+                </span>
+              </a>
+
+              <hr class="divider" />
+
+              <ul class="space-y-3">
+                {tier.features.map((f) => (
+                  <li class="flex items-start gap-2.5 text-sm" style="color: var(--text-secondary);">
+                    <svg class="shrink-0 mt-0.5" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ) : (
+          <!-- Standard tiers -->
+          <div
+            class="p-7 rounded-2xl flex flex-col gap-6"
+            style="background: var(--bg-card); border: 1px solid var(--border-dim);"
+          >
+            <div>
+              <h3 class="font-bold text-xl tracking-tight mb-1" style="color: var(--text-primary);">{tier.name}</h3>
+              <p class="text-sm" style="color: var(--text-secondary);">{tier.tagline}</p>
+            </div>
+
+            <div class="flex items-end gap-1">
+              <span
+                class="font-extrabold number-tabular tracking-tight"
+                style={`color: var(--text-primary); font-size: ${tier.period ? '2.5rem' : '1.5rem'};`}
+              >
+                {tier.price}
+              </span>
+              {tier.period && <span class="text-sm pb-1" style="color: var(--text-secondary);">{tier.period}</span>}
+            </div>
+
+            <a
+              href={tier.cta.href}
+              class="btn-ghost justify-center text-center"
+              style="border-radius: 9999px;"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {tier.cta.text}
+            </a>
+
+            <hr class="divider" />
+
+            <ul class="space-y-3">
+              {tier.features.map((f) => (
+                <li class="flex items-start gap-2.5 text-sm" style="color: var(--text-secondary);">
+                  <svg class="shrink-0 mt-0.5" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-tertiary);" aria-hidden="true">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      ))}
+    </div>
+
+    <p class="text-center text-xs mt-8 reveal" style="color: var(--text-tertiary);">
+      Prices in USD. Taxes may apply. Messaging (SMS/WhatsApp) billed separately.
+    </p>
+
+  </div>
+</section>

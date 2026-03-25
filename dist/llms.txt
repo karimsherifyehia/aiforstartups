@@ -1,0 +1,25 @@
+# Nexus by AiForStartups
+
+> Nexus is a multi-tenant Ops OS for e-commerce SMEs in MENA. It unifies omnichannel messaging, CRM, order fulfillment, inventory, shipping, VoIP, and AI analytics.
+
+## Documentation
+- [Full Docs](https://nexus-docs.aiforstartups.io/)
+- [API Reference](https://nexus-docs.aiforstartups.io/api/)
+- [OpenAPI Spec](https://nexus-docs.aiforstartups.io/openapi.yaml)
+- [Agent Auth Guide](https://nexus-docs.aiforstartups.io/api/#authentication)
+
+## Key Capabilities
+- Omnichannel inbox (WhatsApp, Facebook, Instagram)
+- Order management with Shopify/WooCommerce sync
+- Pick & Pack warehouse workflows with barcode scanning
+- CRM with RFM scoring, churn prediction, smart segments
+- Campaign builder (WhatsApp, Email, SMS)
+- Shipping & AWB tracking (Bosta integration)
+- VoIP call management (Issabel PBX)
+- AI-powered CS analytics, sentiment analysis, embeddings
+
+## For AI Agents
+- Authenticate via API keys: POST /functions/v1/agent-auth
+- Full CRUD on contacts, orders, inventory, messages
+- Scoped permissions per API key
+- See llms.txt on docs site: https://nexus-docs.aiforstartups.io/llms.txt

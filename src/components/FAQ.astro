@@ -1,0 +1,93 @@
+---
+const faqs = [
+  {
+    q: 'What is Nexus?',
+    a: 'Nexus is a multi-tenant operations OS for e-commerce SMEs. It unifies orders, inventory, WhatsApp messaging, CRM, shipping, and AI analytics in one platform — built for teams in Egypt and MENA.',
+  },
+  {
+    q: 'How long does setup take?',
+    a: 'Basic setup takes under an hour. Connect your Shopify or WooCommerce store, link WhatsApp Business, and you\'re operational. Full configuration with custom workflows may take a few days.',
+  },
+  {
+    q: 'Does Nexus support Arabic?',
+    a: 'Yes. Full Arabic UI with RTL layout. Notifications, AI features, and campaign content all support Arabic-first workflows.',
+  },
+  {
+    q: 'What integrations are available?',
+    a: 'WhatsApp Business API, Facebook, Instagram, Shopify, WooCommerce, Bosta (courier), Issabel PBX, and n8n for custom automation workflows.',
+  },
+  {
+    q: 'Is my data secure?',
+    a: 'Data is isolated per organization using PostgreSQL Row-Level Security — encrypted in transit and at rest. Each tenant\'s data is completely invisible to others.',
+  },
+  {
+    q: 'Can AI agents use Nexus?',
+    a: 'Yes. Nexus publishes an OpenAPI spec, llms.txt, and supports API key auth for autonomous AI agents. See our docs for details.',
+  },
+];
+---
+
+<!-- FAQPage structured data -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((f) => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": { "@type": "Answer", "text": f.a },
+  })),
+})} />
+
+<section
+  id="faq"
+  class="py-24"
+  itemscope
+  itemtype="https://schema.org/FAQPage"
+>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6">
+
+    <div class="mb-12 reveal">
+      <span class="section-eyebrow mb-5 block w-fit">FAQ</span>
+      <h2 class="section-title">Frequently asked questions</h2>
+    </div>
+
+    <!-- Clean accordion — divider lines, no card boxes -->
+    <div class="reveal-stagger" style="border-top: 1px solid var(--border-dim);">
+      {faqs.map((faq) => (
+        <details
+          class="group"
+          style="border-bottom: 1px solid var(--border-dim);"
+          itemscope
+          itemprop="mainEntity"
+          itemtype="https://schema.org/Question"
+        >
+          <summary
+            class="flex items-center justify-between gap-6 py-5 cursor-pointer select-none"
+            itemprop="name"
+          >
+            <span class="font-semibold text-sm leading-snug" style="color: var(--text-primary);">{faq.q}</span>
+            <span
+              class="faq-chevron shrink-0 w-6 h-6 rounded-full flex items-center justify-center"
+              style="background: var(--bg-surface); border: 1px solid var(--border-dim);"
+              aria-hidden="true"
+            >
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-secondary);">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </span>
+          </summary>
+          <div
+            class="pb-5 text-sm leading-relaxed"
+            style="color: var(--text-secondary);"
+            itemscope
+            itemprop="acceptedAnswer"
+            itemtype="https://schema.org/Answer"
+          >
+            <p itemprop="text">{faq.a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+
+  </div>
+</section>

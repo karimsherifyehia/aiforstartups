@@ -1,0 +1,98 @@
+---
+const steps = [
+  {
+    n: '01',
+    title: 'Connect',
+    body: 'Link your Shopify or WooCommerce store and WhatsApp Business number. Under an hour, no engineers needed.',
+    accent: '#4f8ef7',
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`,
+  },
+  {
+    n: '02',
+    title: 'Operate',
+    body: 'Run daily pick-pack, handle customer messages, and watch AI surface risks — before they reach your inbox.',
+    accent: '#a78bfa',
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>`,
+  },
+  {
+    n: '03',
+    title: 'Grow',
+    body: 'Launch campaigns to at-risk segments, analyze cohort behavior, and repeat what works.',
+    accent: '#34d399',
+    icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>`,
+  },
+];
+
+const tags = ['Arabic UI', '1 store on Free', 'Issabel & carriers on Pro', 'Go live in a week'];
+---
+
+<section id="how-it-works" class="py-24">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+    <div class="mb-16 reveal">
+      <span class="section-eyebrow mb-5 block w-fit">Process</span>
+      <h2 class="section-title">Go live in a week</h2>
+      <p class="section-body mt-3" style="max-width: 42ch;">
+        Three steps. No long onboarding. No professional services.
+      </p>
+    </div>
+
+    <!-- Steps in a zig-zag card layout -->
+    <div class="space-y-4 reveal-stagger">
+      {steps.map((step, i) => (
+        <div
+          class="group flex flex-col sm:flex-row items-start gap-6 p-7 rounded-2xl transition-all duration-300"
+          style={`
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            ${i === 1 ? 'margin-left: auto; max-width: calc(100% - 2rem);' : ''}
+          `}
+        >
+          <!-- Number + icon -->
+          <div class="flex items-center gap-4 shrink-0">
+            <span
+              class="font-black text-4xl number-tabular leading-none select-none"
+              style={`color: ${step.accent}20;`}
+              aria-hidden="true"
+            >
+              {step.n}
+            </span>
+            <div
+              class="w-12 h-12 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+              style={`background: ${step.accent}10; border: 1px solid ${step.accent}20; color: ${step.accent};`}
+            >
+              <span set:html={step.icon} />
+            </div>
+          </div>
+
+          <!-- Text -->
+          <div>
+            <h3 class="font-bold text-xl mb-2 tracking-tight" style="color: var(--text-primary);">{step.title}</h3>
+            <p class="text-sm leading-relaxed" style="color: var(--text-secondary); max-width: 52ch;">{step.body}</p>
+          </div>
+
+          <!-- Step indicator dot at far right (desktop) -->
+          <div class="hidden sm:flex items-center ml-auto shrink-0">
+            <div
+              class="w-2 h-2 rounded-full"
+              style={`background: ${step.accent}; box-shadow: 0 0 8px ${step.accent}60;`}
+            ></div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Feature tags -->
+    <div class="flex flex-wrap gap-2 mt-10 reveal">
+      {tags.map((tag) => (
+        <span
+          class="px-3.5 py-1.5 rounded-full text-xs font-medium"
+          style="background: var(--bg-surface); border: 1px solid var(--border-dim); color: var(--text-secondary);"
+        >
+          {tag}
+        </span>
+      ))}
+    </div>
+
+  </div>
+</section>

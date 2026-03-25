@@ -1,0 +1,106 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  canonical?: string;
+}
+
+const {
+  title = 'Nexus — Ops OS for E-commerce | Orders, WhatsApp, CRM, Shipping',
+  description = 'Nexus unifies orders, inventory, WhatsApp, CRM, and shipping for e-commerce teams in MENA. Free plan available. Go live in a week.',
+  ogImage = 'https://aiforstartups.io/og-image.png',
+  canonical = 'https://aiforstartups.io/',
+} = Astro.props;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Nexus",
+  "description": "Multi-tenant Ops OS for e-commerce SMEs in MENA. Unifies orders, inventory, WhatsApp, CRM, and shipping.",
+  "url": "https://aiforstartups.io",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "description": "Free plan available"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "AiForStartups",
+    "url": "https://aiforstartups.io"
+  }
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="ops os, e-commerce operations, whatsapp crm, order management egypt, inventory management mena, shopify integration, pick and pack, shipping tracking" />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Nexus — The fastest path from chaos to shipped" />
+    <meta property="og:description" content="Unify orders, inventory, WhatsApp, and shipping in one place. Free plan available." />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Nexus by AiForStartups" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Nexus — Ops OS for E-commerce" />
+    <meta name="twitter:description" content="Unify orders, inventory, WhatsApp, and shipping in one place." />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Outfit font — modern grotesque, not Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload" as="style"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- AI agent discoverability -->
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+
+    <!-- Scroll-entry IntersectionObserver -->
+    <script>
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('in-view');
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.08, rootMargin: '0px 0px -32px 0px' }
+      );
+      document.querySelectorAll('.reveal, .reveal-stagger').forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>

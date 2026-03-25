@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+---
+
+<Base
+  title="Terms of Service — Nexus by AiForStartups"
+  description="Terms of service for Nexus, the operations OS for e-commerce teams."
+  canonical="https://aiforstartups.io/terms/"
+>
+  <Nav />
+  <main class="max-w-3xl mx-auto px-4 sm:px-6 pt-32 pb-20">
+    <h1 class="text-3xl font-bold text-white mb-2">Terms of Service</h1>
+    <p class="text-sm mb-10" style="color: #8888a0;">Last updated: March 2025</p>
+
+    <div class="space-y-8 text-sm leading-relaxed" style="color: #8888a0;">
+      <section>
+        <h2 class="text-lg font-semibold text-white mb-3">1. Acceptance</h2>
+        <p>By accessing or using the Nexus platform, you agree to be bound by these Terms of Service and all applicable laws. If you do not agree, do not use the service.</p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-semibold text-white mb-3">2. Service Description</h2>
+        <p>Nexus is a multi-tenant operations platform for e-commerce businesses. We provide tools for order management, inventory, customer communication, CRM, shipping, and analytics.</p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-semibold text-white mb-3">3. Acceptable Use</h2>
+        <p>You may not use Nexus for any illegal activity, to send spam, or to violate WhatsApp Business policies. You are responsible for all activity on your account.</p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-semibold text-white mb-3">4. Data Ownership</h2>
+        <p>You retain ownership of your data. We do not claim any rights to your business data, customer information, or content you upload to the platform.</p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-semibold text-white mb-3">5. Service Availability</h2>
+        <p>We target 99.9% uptime on Pro and Enterprise plans. Free plan services are provided on a best-effort basis. Scheduled maintenance will be communicated in advance.</p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-semibold text-white mb-3">6. Contact</h2>
+        <p>For questions about these terms, contact us via <a href="https://wa.me/201040003090" class="text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">WhatsApp</a>.</p>
+        <p class="mt-2 text-xs" style="color: #444458;"><!-- TODO: Complete full terms of service with legal counsel --></p>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Base>

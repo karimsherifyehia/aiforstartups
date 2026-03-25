@@ -1,0 +1,173 @@
+---
+const links = [
+  { label: 'Modules',  href: '#modules' },
+  { label: 'Demo',     href: '#demo' },
+  { label: 'Pricing',  href: '#pricing' },
+  { label: 'Docs',     href: 'https://nexus-docs.aiforstartups.io', external: true },
+];
+---
+
+<!-- Floating pill nav -->
+<header id="site-nav" class="fixed top-0 left-0 right-0 z-50 flex justify-center pt-5 px-4 pointer-events-none">
+  <nav
+    id="nav-pill"
+    class="pointer-events-auto flex items-center gap-1 px-2 py-2 transition-all duration-500"
+    style="
+      border-radius: 9999px;
+      background: rgba(11,11,18,0.75);
+      backdrop-filter: blur(20px) saturate(1.5);
+      -webkit-backdrop-filter: blur(20px) saturate(1.5);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 8px 32px rgba(0,0,0,0.45);
+    "
+    aria-label="Main navigation"
+  >
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-2 pl-2 pr-3 shrink-0">
+      <svg width="22" height="22" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+        <rect width="28" height="28" rx="7" fill="#4f8ef7"/>
+        <path d="M8 14 L14 8 L20 14 L14 20 Z" fill="white" opacity="0.92"/>
+        <path d="M11.5 14 L14 11.5 L16.5 14 L14 16.5 Z" fill="rgba(8,8,13,0.6)"/>
+      </svg>
+      <span class="font-bold text-white text-sm tracking-tight">Nexus</span>
+    </a>
+
+    <!-- Separator -->
+    <div class="w-px h-4 mx-1" style="background: rgba(255,255,255,0.08);"></div>
+
+    <!-- Desktop links -->
+    <ul class="hidden md:flex items-center gap-0.5">
+      {links.map((l) => (
+        <li>
+          <a
+            href={l.href}
+            target={l.external ? '_blank' : undefined}
+            rel={l.external ? 'noopener noreferrer' : undefined}
+            class="nav-link px-3.5 py-1.5 rounded-full text-sm font-medium transition-all duration-200"
+            style="color: rgba(255,255,255,0.55);"
+          >
+            {l.label}{l.external ? ' ↗' : ''}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- Desktop CTA -->
+    <a
+      href="https://nexus.aiforstartups.io"
+      class="hidden md:flex ml-1 btn-primary text-sm py-2 px-4"
+      style="border-radius: 9999px;"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Start free
+      <span class="btn-icon">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
+        </svg>
+      </span>
+    </a>
+
+    <!-- Mobile hamburger -->
+    <button
+      id="nav-toggle"
+      class="md:hidden flex flex-col gap-[5px] p-2.5 rounded-full ml-1 transition-colors duration-200"
+      style="background: rgba(255,255,255,0.06);"
+      aria-label="Open menu"
+      aria-expanded="false"
+    >
+      <span class="ham-line block w-4 h-[1.5px] bg-white rounded transition-all duration-250 origin-center" id="h1"></span>
+      <span class="ham-line block w-4 h-[1.5px] bg-white rounded transition-all duration-250" id="h2"></span>
+      <span class="ham-line block w-4 h-[1.5px] bg-white rounded transition-all duration-250 origin-center" id="h3"></span>
+    </button>
+  </nav>
+</header>
+
+<!-- Mobile overlay menu -->
+<div
+  id="mobile-overlay"
+  class="fixed inset-0 z-40 flex flex-col items-center justify-center gap-3 pointer-events-none opacity-0 transition-opacity duration-300"
+  style="background: rgba(8,8,13,0.92); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);"
+  aria-hidden="true"
+>
+  {links.map((l, i) => (
+    <a
+      href={l.href}
+      target={l.external ? '_blank' : undefined}
+      rel={l.external ? 'noopener noreferrer' : undefined}
+      class="mobile-nav-link text-2xl font-bold text-white opacity-0 translate-y-4 transition-all duration-400"
+      style={`transition-delay: ${i * 60}ms;`}
+    >
+      {l.label}
+    </a>
+  ))}
+  <a
+    href="https://nexus.aiforstartups.io"
+    class="mobile-nav-link btn-primary mt-4 opacity-0 translate-y-4 transition-all duration-400"
+    style="transition-delay: 240ms; border-radius: 9999px;"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Start free →
+  </a>
+</div>
+
+<style>
+  .nav-link:hover {
+    color: rgba(255,255,255,0.9) !important;
+    background: rgba(255,255,255,0.06);
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const overlay = document.getElementById('mobile-overlay');
+  const h1 = document.getElementById('h1');
+  const h2 = document.getElementById('h2');
+  const h3 = document.getElementById('h3');
+  let open = false;
+
+  function openMenu() {
+    open = true;
+    overlay!.style.pointerEvents = 'auto';
+    overlay!.style.opacity = '1';
+    overlay!.setAttribute('aria-hidden', 'false');
+    toggle!.setAttribute('aria-expanded', 'true');
+    // Animate hamburger to X
+    h1!.style.transform = 'translateY(6.5px) rotate(45deg)';
+    h2!.style.opacity = '0';
+    h3!.style.transform = 'translateY(-6.5px) rotate(-45deg)';
+    // Stagger links in
+    overlay!.querySelectorAll('.mobile-nav-link').forEach((el) => {
+      (el as HTMLElement).style.opacity = '1';
+      (el as HTMLElement).style.transform = 'none';
+    });
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    open = false;
+    overlay!.style.opacity = '0';
+    setTimeout(() => {
+      overlay!.style.pointerEvents = 'none';
+      overlay!.setAttribute('aria-hidden', 'true');
+    }, 300);
+    toggle!.setAttribute('aria-expanded', 'false');
+    h1!.style.transform = '';
+    h2!.style.opacity = '';
+    h3!.style.transform = '';
+    overlay!.querySelectorAll('.mobile-nav-link').forEach((el) => {
+      (el as HTMLElement).style.opacity = '0';
+      (el as HTMLElement).style.transform = 'translateY(16px)';
+    });
+    document.body.style.overflow = '';
+  }
+
+  toggle?.addEventListener('click', () => open ? closeMenu() : openMenu());
+
+  // Close on link click
+  overlay?.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeMenu));
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && open) closeMenu(); });
+</script>

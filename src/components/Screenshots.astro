@@ -1,0 +1,80 @@
+---
+const screenshots = [
+  {
+    src: '/screenshots/crm-overview.png',
+    alt: 'Nexus CRM overview screen showing revenue, conversion, and LTV metrics',
+    caption: 'CRM Overview',
+    sub: 'Revenue, conversion, LTV at a glance',
+  },
+  {
+    src: '/screenshots/inbox.png',
+    alt: 'Nexus Messenger Hub showing unified WhatsApp, Facebook, and Instagram inbox',
+    caption: 'Messenger Hub',
+    sub: 'Every channel, one inbox',
+  },
+  {
+    src: '/screenshots/pickpack.png',
+    alt: 'Nexus Pick & Pack dashboard with barcode scanning interface',
+    caption: 'Pick & Pack',
+    sub: 'Barcode scanning, zero errors',
+  },
+  {
+    src: '/screenshots/shipping.png',
+    alt: 'Nexus Shipping Tracker showing AWB status and real-time delivery updates',
+    caption: 'Shipping Tracker',
+    sub: 'AWB status, real-time updates',
+  },
+];
+---
+
+<section id="screenshots" class="py-20">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+    <div class="text-center mb-12 fade-up">
+      <p class="section-label mb-3">Platform</p>
+      <h2 class="section-title">Experience the platform</h2>
+      <p class="section-subtitle max-w-lg mx-auto">
+        Clean interfaces built for ops teams, not dashboards built for demos.
+      </p>
+    </div>
+
+    <!-- Scrollable row on mobile, grid on desktop -->
+    <div
+      class="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory lg:grid lg:grid-cols-4 lg:overflow-visible lg:pb-0 fade-up"
+      style="-webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: #1e1e2e transparent;"
+    >
+      {screenshots.map((shot) => (
+        <figure
+          class="shrink-0 w-72 sm:w-80 lg:w-auto snap-center rounded-xl overflow-hidden group cursor-default"
+          style="background: #111118; border: 1px solid #1e1e2e;"
+        >
+          <!-- Device shadow frame -->
+          <div
+            class="relative overflow-hidden"
+            style="aspect-ratio: 16/10; background: #0d0d14;"
+          >
+            <img
+              src={shot.src}
+              alt={shot.alt}
+              class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+              decoding="async"
+              width="640"
+              height="400"
+            />
+            <!-- Subtle gradient at bottom -->
+            <div
+              class="absolute bottom-0 left-0 right-0 h-12 pointer-events-none"
+              style="background: linear-gradient(to top, #111118, transparent);"
+              aria-hidden="true"
+            ></div>
+          </div>
+          <figcaption class="px-4 py-3">
+            <p class="font-semibold text-sm text-white">{shot.caption}</p>
+            <p class="text-xs mt-0.5" style="color: #8888a0;">{shot.sub}</p>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

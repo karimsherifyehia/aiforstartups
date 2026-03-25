@@ -1,0 +1,92 @@
+---
+const items = [
+  {
+    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`,
+    label: 'OpenAPI 3.1 spec',
+    desc: 'Full machine-readable contract for all Nexus resources.',
+    href: 'https://nexus-docs.aiforstartups.io/openapi.yaml',
+    link: 'openapi.yaml →',
+  },
+  {
+    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`,
+    label: 'llms.txt discovery',
+    desc: 'Standardised capability manifest for agent discovery.',
+    href: '/llms.txt',
+    link: 'llms.txt →',
+  },
+  {
+    icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
+    label: 'Agent auth via API keys',
+    desc: 'Scoped keys with CRUD access to contacts, orders & messages.',
+    href: 'https://nexus-docs.aiforstartups.io/api/#authentication',
+    link: 'Auth docs →',
+  },
+];
+---
+
+<section id="for-agents" class="py-24">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+    <div class="bezel-card reveal">
+      <div
+        class="bezel-inner p-8 md:p-12 relative overflow-hidden"
+        style="background-image: radial-gradient(ellipse 50% 60% at 80% 50%, rgba(79,142,247,0.05), transparent);"
+      >
+        <div class="max-w-2xl">
+          <span class="section-eyebrow mb-6 inline-block">For AI agents</span>
+
+          <h2 class="section-title mb-5">
+            Built for humans.<br/>
+            <span class="text-accent">Discoverable by AI.</span>
+          </h2>
+
+          <p class="section-body mb-10">
+            Nexus publishes machine-readable APIs, OpenAPI specs, and
+            <code
+              class="text-sm px-1.5 py-0.5 rounded"
+              style="background: rgba(255,255,255,0.06); color: var(--text-primary); font-family: monospace;"
+            >llms.txt</code>
+            so AI agents can discover, understand, and operate your business on your behalf.
+          </p>
+
+          <div class="grid sm:grid-cols-3 gap-3 mb-10">
+            {items.map((item) => (
+              <div
+                class="p-4 rounded-xl"
+                style="background: rgba(8,8,13,0.6); border: 1px solid var(--border-dim);"
+              >
+                <div
+                  class="w-9 h-9 rounded-xl flex items-center justify-center mb-3"
+                  style="background: rgba(79,142,247,0.08); border: 1px solid rgba(79,142,247,0.14); color: var(--accent);"
+                >
+                  <span set:html={item.icon} />
+                </div>
+                <h3 class="font-semibold text-sm mb-1" style="color: var(--text-primary);">{item.label}</h3>
+                <p class="text-xs mb-2.5 leading-relaxed" style="color: var(--text-secondary);">{item.desc}</p>
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-xs font-medium transition-colors duration-150"
+                  style="color: var(--accent-hi);"
+                >
+                  {item.link}
+                </a>
+              </div>
+            ))}
+          </div>
+
+          <a
+            href="https://nexus-docs.aiforstartups.io"
+            class="btn-ghost inline-flex"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Read the docs →
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

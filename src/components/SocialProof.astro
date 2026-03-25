@@ -1,0 +1,98 @@
+---
+// REPLACE WITH REAL NUMBERS
+const metrics = [
+  { value: '50k+',  label: 'Orders processed', mono: true },
+  { value: '200k+', label: 'Messages handled',  mono: true },
+  { value: '30+',   label: 'Organizations',     mono: true },
+  { value: '99.9%', label: 'Uptime',            mono: true },
+];
+
+// TODO: Replace placeholder testimonials with real customer quotes
+const testimonials = [
+  {
+    quote: 'Replace with a real customer quote. This placeholder should be removed before launch.',
+    name: 'Name Surname',
+    title: 'Operations Manager',
+    company: 'Company',
+    initials: 'NS',
+  },
+  {
+    quote: 'Replace with a real customer quote. This placeholder should be removed before launch.',
+    name: 'Name Surname',
+    title: 'Founder & CEO',
+    company: 'Company',
+    initials: 'NS',
+  },
+  {
+    quote: 'Replace with a real customer quote. This placeholder should be removed before launch.',
+    name: 'Name Surname',
+    title: 'Head of CS',
+    company: 'Company',
+    initials: 'NS',
+  },
+];
+---
+
+<section id="social-proof" class="py-24">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+    <div class="mb-14 reveal">
+      <span class="section-eyebrow mb-5 block w-fit">Social proof</span>
+      <h2 class="section-title">Trusted by operations teams</h2>
+    </div>
+
+    <!-- Metrics — REPLACE WITH REAL NUMBERS -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-14 reveal-stagger">
+      {metrics.map((m) => (
+        <div
+          class="p-6 rounded-2xl text-center"
+          style="background: var(--bg-card); border: 1px solid var(--border-dim);"
+        >
+          <div
+            class="text-3xl font-extrabold mb-1.5 number-tabular"
+            style="color: var(--text-primary); letter-spacing: -0.03em;"
+          >
+            {m.value}
+          </div>
+          <div class="text-xs font-medium" style="color: var(--text-tertiary);">{m.label}</div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Testimonials — TODO: Replace with real quotes -->
+    <!-- Using a staggered 2+1 layout instead of 3 equal columns -->
+    <div class="grid md:grid-cols-3 gap-4 reveal-stagger" style="opacity: 0.55;">
+      {testimonials.map((t) => (
+        <blockquote
+          class="p-6 rounded-2xl flex flex-col gap-5"
+          style="background: var(--bg-card); border: 1px solid var(--border-dim);"
+        >
+          <!-- Stars -->
+          <div class="flex gap-0.5" aria-label="5 stars">
+            {[...Array(5)].map(() => (
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="#fbbf24" aria-hidden="true">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+            ))}
+          </div>
+
+          <p class="text-sm leading-relaxed flex-1 italic" style="color: var(--text-secondary);">"{t.quote}"</p>
+
+          <footer class="flex items-center gap-3">
+            <div
+              class="w-9 h-9 rounded-xl flex items-center justify-center text-xs font-bold shrink-0"
+              style="background: var(--bg-surface); color: var(--text-tertiary); border: 1px solid var(--border-dim);"
+            >
+              {t.initials}
+            </div>
+            <div>
+              <div class="text-sm font-semibold" style="color: var(--text-primary);">{t.name}</div>
+              <div class="text-xs" style="color: var(--text-tertiary);">{t.title} · {t.company}</div>
+            </div>
+          </footer>
+        </blockquote>
+      ))}
+    </div>
+
+  </div>
+</section>

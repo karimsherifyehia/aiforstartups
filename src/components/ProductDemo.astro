@@ -1,0 +1,155 @@
+---
+const shortClips = [
+  {
+    title: 'Inbox in 30 seconds',
+    description: 'Unified WhatsApp, FB & IG — one queue',
+    poster: '/screenshots/inbox.png',
+    src: '/videos/inbox-demo.mp4',
+  },
+  {
+    title: 'Pick & Pack flow',
+    description: 'Scan, pick, ship — zero mistakes',
+    poster: '/screenshots/pickpack.png',
+    src: '/videos/pickpack-demo.mp4',
+  },
+  {
+    title: 'CRM segments',
+    description: 'RFM, churn risk, smart messaging',
+    poster: '/screenshots/crm-overview.png',
+    src: '/videos/crm-demo.mp4',
+  },
+];
+
+// Replace with real YouTube/Vimeo ID when available
+const mainVideoId = 'REPLACE_WITH_YOUTUBE_ID';
+const useMainVideo = false; // Set to true when a real video ID is available
+---
+
+<section id="demo" class="py-20" style="background: linear-gradient(180deg, transparent, rgba(17,17,24,0.5), transparent);">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+    <div class="text-center mb-12 fade-up">
+      <p class="section-label mb-3">Product demo</p>
+      <h2 class="section-title">See it in action</h2>
+      <p class="section-subtitle max-w-lg mx-auto">
+        Watch how e-commerce teams go from WhatsApp chaos to clean, shipped orders.
+      </p>
+    </div>
+
+    <!-- Main video (YouTube embed or placeholder) -->
+    <div class="fade-up mb-10">
+      <div
+        class="relative rounded-2xl overflow-hidden mx-auto"
+        style="max-width: 800px; aspect-ratio: 16/9; background: #111118; border: 1px solid #1e1e2e;"
+      >
+        {useMainVideo ? (
+          <iframe
+            src={`https://www.youtube.com/embed/${mainVideoId}?rel=0&modestbranding=1`}
+            title="Nexus product walkthrough"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+            class="absolute inset-0 w-full h-full border-0"
+          />
+        ) : (
+          <!-- Placeholder: replace with real video thumbnail + embed -->
+          <div class="absolute inset-0 flex flex-col items-center justify-center gap-4">
+            <img
+              src="/screenshots/crm-overview.png"
+              alt="Nexus dashboard"
+              class="absolute inset-0 w-full h-full object-cover opacity-20"
+              loading="lazy"
+              decoding="async"
+            />
+            <button
+              class="relative z-10 w-16 h-16 rounded-full flex items-center justify-center transition-transform duration-200 hover:scale-110"
+              style="background: var(--gradient-cta); box-shadow: 0 0 40px rgba(59,130,246,0.4);"
+              aria-label="Play full product demo"
+              id="main-play-btn"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+                <polygon points="5 3 19 12 5 21 5 3"/>
+              </svg>
+            </button>
+            <div class="relative z-10 text-center">
+              <p class="font-semibold text-white">Full product walkthrough</p>
+              <p class="text-sm mt-1" style="color: #8888a0;">~3 min · Orders, inbox, CRM & shipping</p>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+
+    <!-- Short clip cards -->
+    <div class="grid sm:grid-cols-3 gap-5 stagger-children">
+      {shortClips.map((clip, i) => (
+        <div class="video-card group cursor-pointer rounded-xl overflow-hidden" style="background: #111118; border: 1px solid #1e1e2e;" data-clip-index={i}>
+          <div class="relative" style="aspect-ratio: 16/9;">
+            <video
+              muted
+              loop
+              playsinline
+              preload="none"
+              poster={clip.poster}
+              class="w-full h-full object-cover"
+              aria-label={clip.title}
+            >
+              <source src={clip.src} type="video/mp4" />
+            </video>
+            <!-- Play overlay -->
+            <div
+              class="absolute inset-0 flex items-center justify-center transition-opacity duration-200 group-hover:opacity-0"
+              style="background: rgba(10,10,15,0.4);"
+            >
+              <div
+                class="w-10 h-10 rounded-full flex items-center justify-center"
+                style="background: rgba(59,130,246,0.9); box-shadow: 0 0 20px rgba(59,130,246,0.4);"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="font-semibold text-white text-sm mb-1">{clip.title}</h3>
+            <p class="text-xs" style="color: #8888a0;">{clip.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  // Hover-to-play on desktop, tap-to-play on mobile
+  document.querySelectorAll<HTMLElement>('.video-card').forEach((card) => {
+    const video = card.querySelector('video') as HTMLVideoElement | null;
+    if (!video) return;
+
+    const isMobile = () => window.matchMedia('(hover: none)').matches;
+
+    if (!isMobile()) {
+      card.addEventListener('mouseenter', () => {
+        video.play().catch(() => {});
+      });
+      card.addEventListener('mouseleave', () => {
+        video.pause();
+        video.currentTime = 0;
+      });
+    } else {
+      card.addEventListener('click', () => {
+        if (video.paused) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }
+  });
+
+  // Main play button — open WhatsApp for demo when no real video
+  document.getElementById('main-play-btn')?.addEventListener('click', () => {
+    window.open('https://wa.me/201040003090?text=Hi%2C+I%27d+like+to+see+a+Nexus+demo', '_blank', 'noopener,noreferrer');
+  });
+</script>

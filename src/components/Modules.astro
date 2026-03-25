@@ -1,0 +1,174 @@
+---
+// Bento grid layout — asymmetric, not 3 equal columns
+// Hero card spans full width, rest mix 1/2 and 1/3 widths
+const mods = [
+  {
+    id: 'messenger-hub',
+    span: 'lg:col-span-2',          // wide
+    accent: '#4f8ef7',
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
+    title: 'Messenger Hub',
+    tagline: 'Every channel. One queue.',
+    bullets: [
+      'Unified WhatsApp, Facebook & Instagram inbox with full customer profile',
+      'Assign conversations, track SLAs, close faster',
+      'One click to launch a campaign from any conversation',
+    ],
+    screenshot: '/screenshots/inbox.png',
+  },
+  {
+    id: 'ai-signal',
+    span: 'lg:col-span-1',          // narrow
+    accent: '#a78bfa',
+    badge: 'AI-powered',
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`,
+    title: 'AI Signal Layer',
+    tagline: 'Every message read. Every risk flagged. Before your team even opens the inbox.',
+    bullets: [
+      'Churn risk, wrong promises, sentiment & intent — auto-tagged',
+      'Live risk alerts with confidence scores',
+      'Arabic & English, across all channels',
+    ],
+  },
+  {
+    id: 'warehouse',
+    span: 'lg:col-span-1',
+    accent: '#34d399',
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
+    title: 'Warehouse & Pick-Pack',
+    tagline: 'Pick faster. Ship right.',
+    bullets: [
+      'Create pick lists, scan barcodes, avoid mispicks',
+      'Print packing slips & labels in one click',
+      'Real-time shortage alerts',
+    ],
+  },
+  {
+    id: 'automations',
+    span: 'lg:col-span-1',
+    accent: '#fbbf24',
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="9" height="9"/><rect x="13" y="2" width="9" height="9"/><rect x="13" y="13" width="9" height="9"/><rect x="2" y="13" width="9" height="9"/></svg>`,
+    title: 'Automations',
+    tagline: 'Connect anything. Trigger everything.',
+    bullets: [
+      'Scrapers, flows, webhooks — ready to deploy',
+      'Trigger ops or messages from any event',
+      'Native connectors for Shopify, Woo, carriers & Issabel',
+    ],
+  },
+  {
+    id: 'crm',
+    span: 'lg:col-span-2',          // wide
+    accent: '#f472b6',
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+    title: 'Customers 2.0',
+    tagline: 'Know your buyers before they churn.',
+    bullets: [
+      'RFM scoring, churn risk, and LTV — automated',
+      'Smart segments ready to message in one click',
+      'Cohort analysis and product bundle insights',
+    ],
+    screenshot: '/screenshots/crm-overview.png',
+  },
+  {
+    id: 'growth',
+    span: 'lg:col-span-1',
+    accent: '#22d3ee',
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>`,
+    title: 'Growth',
+    tagline: 'Campaigns that convert.',
+    bullets: [
+      'WhatsApp, Email & SMS from one campaign builder',
+      'Track conversions and repeat purchase rates',
+      'Actionable dashboards — no analyst required',
+    ],
+  },
+];
+---
+
+<section id="modules" class="py-24">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+    <div class="mb-14 reveal">
+      <span class="section-eyebrow mb-5 block w-fit">Platform</span>
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+        <h2 class="section-title" style="max-width: 22ch;">
+          Nexus modules
+        </h2>
+        <p class="section-body" style="max-width: 34ch;">
+          Start with operations;<br/>add growth later.
+        </p>
+      </div>
+    </div>
+
+    <!-- Bento grid: 3 columns on desktop, 1 on mobile -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 reveal-stagger">
+      {mods.map((mod) => (
+        <article
+          class={`mod-card group relative flex flex-col ${mod.span ?? ''}`}
+          aria-labelledby={`mod-${mod.id}`}
+          style={mod.screenshot ? 'min-height: 340px;' : ''}
+        >
+          <!-- Badge -->
+          {mod.badge && (
+            <div
+              class="absolute top-5 right-5 text-xs font-semibold px-2.5 py-1 rounded-full"
+              style="background: rgba(167,139,250,0.1); color: #a78bfa; border: 1px solid rgba(167,139,250,0.2); letter-spacing: 0.04em;"
+            >
+              {mod.badge}
+            </div>
+          )}
+
+          <!-- Icon -->
+          <div
+            class="w-10 h-10 rounded-xl flex items-center justify-center mb-5 shrink-0 transition-transform duration-300 group-hover:scale-110"
+            style={`background: ${mod.accent}12; border: 1px solid ${mod.accent}25; color: ${mod.accent};`}
+          >
+            <span set:html={mod.icon} />
+          </div>
+
+          <!-- Text -->
+          <h3 id={`mod-${mod.id}`} class="font-bold text-base mb-1.5" style="color: var(--text-primary); letter-spacing: -0.015em;">{mod.title}</h3>
+          <p class="text-sm mb-4 leading-relaxed" style="color: var(--text-secondary);">{mod.tagline}</p>
+
+          <ul class="space-y-2 mb-5">
+            {mod.bullets.map((b) => (
+              <li class="flex items-start gap-2 text-xs leading-relaxed" style="color: var(--text-secondary);">
+                <svg class="shrink-0 mt-0.5" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style={`color: ${mod.accent};`} aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                {b}
+              </li>
+            ))}
+          </ul>
+
+          <!-- Screenshot thumbnail at bottom -->
+          {mod.screenshot && (
+            <div
+              class="mt-auto rounded-lg overflow-hidden"
+              style="border: 1px solid var(--border-dim); aspect-ratio: 16/8;"
+            >
+              <img
+                src={mod.screenshot}
+                alt=""
+                role="presentation"
+                class="w-full h-full object-cover object-top opacity-60 group-hover:opacity-90 transition-opacity duration-400"
+                loading="lazy"
+                decoding="async"
+                width="640"
+                height="320"
+              />
+            </div>
+          )}
+
+          <!-- Hover accent line at top -->
+          <div
+            class="absolute top-0 left-6 right-6 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            style={`background: linear-gradient(to right, transparent, ${mod.accent}60, transparent);`}
+            aria-hidden="true"
+          ></div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
