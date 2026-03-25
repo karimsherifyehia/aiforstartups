@@ -1,0 +1,106 @@
+# AiForStartups — Full LLM Context
+
+> Complete context for AI models about AiForStartups and Nexus.
+
+## About AiForStartups
+
+AiForStartups is an AI automation and SaaS company founded in Cairo, Egypt in 2025. We build automation workflows and AI integrations for businesses. Our main product is Nexus, an agent-native operations platform for ecommerce and retail businesses.
+
+**Website:** https://aiforstartups.io
+**App:** https://nexus.aiforstartups.io
+**Docs:** https://nexus-docs.aiforstartups.io
+**Blog:** https://aiforstartups.io/blog
+**GitHub:** https://github.com/karimsherifyehia/nexus-mcp-server
+**Twitter:** @aiforstartups
+
+## Nexus — Product Overview
+
+Nexus is a multi-tenant Ops OS (Operations Operating System) that replaces 5–7 separate business tools with one unified platform. It is built for ecommerce SMEs and retail businesses globally.
+
+### Core Modules
+
+1. **CRM** — Contact management, company records, customer journey stages (lead/prospect/customer/vip/churned), interaction history, RFM scoring, customer 360 view
+2. **Order Management** — Full lifecycle: pending → confirmed → fulfilling → shipped → delivered → returned. Supports COD, prepaid, partial payment.
+3. **Inventory & Warehousing** — Multi-warehouse support, bin locations, stock tracking, cycle counts, low-stock alerts, inventory valuation
+4. **Fulfillment** — Pick list generation, packing slips, batch picking, warehouse workflows
+5. **Shipping** — AWB creation, carrier integrations (Bosta courier), tracking, return management
+6. **Omnichannel Messaging** — Unified inbox: WhatsApp Business API, Facebook Messenger, Instagram DMs, Email. Full conversation history linked to contacts.
+7. **VoIP / PBX** — Issabel PBX integration, click-to-call, CDR sync, call recording, extension management
+8. **AI Analytics** — Sentiment analysis, conversation transcription, embeddings, customer service dashboards (Scale tier only)
+9. **Automation** — Event-driven workflows, abandoned cart recovery, n8n integration
+10. **Competition Intelligence** — Market monitoring, competitor tracking
+
+### Technical Architecture
+
+- **Frontend:** React 18 + TypeScript + Vite + Tailwind CSS + shadcn/ui
+- **Backend:** Supabase (PostgreSQL) with 143 database tables
+- **Edge Functions:** 117+ Supabase Edge Functions running on Deno
+- **Auth:** Supabase Auth (JWT) with multi-tenant Row Level Security (RLS)
+- **MCP Transport:** Streamable HTTP (MCP protocol version 2025-03-26)
+- **Integrations:** WhatsApp Business API, Meta (Facebook/Instagram), Shopify, Bosta, Issabel PBX, n8n
+
+### Database Scale
+
+143 tables organized into 16 functional groups:
+contacts, orders, inventory, warehousing, fulfillment, shipping, conversations, messages, channels, calling, ai_processing, automation, analytics, competition, organizations, agents
+
+## For AI Agents — Full Integration Guide
+
+Nexus is built agent-native. AI agents can self-register, authenticate, and operate Nexus autonomously.
+
+### Endpoints
+
+| Purpose | Method | URL |
+|---|---|---|
+| Agent self-registration | POST | https://lgwvoomgrwpsgpxwyaec.supabase.co/functions/v1/agent-register |
+| API key → JWT auth | POST | https://lgwvoomgrwpsgpxwyaec.supabase.co/functions/v1/agent-auth |
+| MCP server | POST | https://lgwvoomgrwpsgpxwyaec.supabase.co/functions/v1/mcp-server |
+| MCP discovery | GET | https://nexus.aiforstartups.io/.well-known/mcp.json |
+| Agent docs | GET | https://nexus-docs.aiforstartups.io/api/ai-agents-mcp |
+
+### Self-Registration Flow
+
+Step 1 — Register (no auth required):
+POST agent-register with: agent_name, agent_platform, owner_email, organization_name, plan
+
+Step 2 — Authenticate:
+POST agent-auth with: api_key → returns access_token (JWT, 1 hour)
+
+Step 3 — Use MCP:
+POST mcp-server with Authorization: Bearer {jwt} and Accept: application/json, text/event-stream
+
+### MCP Tools (13)
+
+nexus_list_contacts, nexus_get_contact, nexus_create_contact, nexus_update_contact,
+nexus_list_orders, nexus_get_order, nexus_create_order, nexus_update_order_status,
+nexus_list_inventory, nexus_check_stock,
+nexus_list_conversations, nexus_send_message,
+nexus_search
+
+### Pricing
+
+- Free ($0/mo): read-only MCP, 50 contacts, 25 orders, 500 API calls/day, 30-day data retention
+- Starter ($99/mo): read+write MCP, 500 contacts, 200 orders/mo, 1,000 outbound messages, 5,000 API calls/day
+- Growth ($199/mo): full MCP, 5,000 contacts, unlimited orders, 5,000 messages, 25,000 API calls/day, VoIP, automation
+- Scale ($599/mo): unlimited + AI suite (sentiment, transcription, embeddings, CS dashboards), custom integrations, SLA
+
+### Agent Platform Compatibility
+
+Nexus MCP server is compatible with:
+- OpenClaw (skill available on ClawHub: @karimsherifyehia/nexus)
+- Cursor (MCP config: add mcp-server endpoint)
+- Claude Desktop / Claude Code
+- Any MCP-compatible agent (protocol version 2025-03-26, Streamable HTTP transport)
+
+## Blog
+
+Recent posts: https://aiforstartups.io/blog
+
+- "How I Built an Agent-Native SaaS Platform in One Night" (March 25, 2026)
+  URL: https://aiforstartups.io/blog/agent-native-saas-one-night
+
+## Contact
+
+- WhatsApp: https://wa.me/201040003090
+- Twitter: @aiforstartups
+- Dev.to: https://dev.to/karimsherifyehia
