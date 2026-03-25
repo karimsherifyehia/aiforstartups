@@ -1,0 +1,61 @@
+---
+import Base from './Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+const { frontmatter } = Astro.props;
+---
+
+<Base
+  title={`${frontmatter.title} — Nexus Blog`}
+  description={frontmatter.description}
+  canonical={`https://aiforstartups.io/blog/${frontmatter.slug}`}
+>
+  <Nav />
+  <main class="min-h-screen pt-32 pb-24">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6">
+
+      <div class="mb-10 reveal">
+        <a href="/blog" class="text-sm mb-6 inline-flex items-center gap-1.5 transition-colors"
+          style="color: var(--text-muted);"
+          onmouseover="this.style.color='var(--accent)'"
+          onmouseout="this.style.color='var(--text-muted)'">
+          ← All posts
+        </a>
+        <div class="flex items-center gap-3 mt-4 mb-4">
+          <time class="text-xs" style="color: var(--text-muted);">{frontmatter.date}</time>
+          {frontmatter.tags?.map((tag: string) => (
+            <span class="text-xs px-2 py-0.5 rounded-full"
+              style="background: rgba(79,142,247,0.1); color: var(--accent);">{tag}</span>
+          ))}
+        </div>
+        <h1 class="section-title mb-4">{frontmatter.title}</h1>
+        <p class="section-body">{frontmatter.description}</p>
+        {frontmatter.author && (
+          <div class="mt-4 text-sm" style="color: var(--text-muted);">By {frontmatter.author}</div>
+        )}
+      </div>
+
+      <hr style="border-color: var(--border-dim); margin-bottom: 2.5rem;" />
+
+      <div class="prose reveal" style="color: var(--text-secondary); max-width: none;">
+        <slot />
+      </div>
+
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .prose h2 { color: var(--text-primary); font-size: 1.4rem; font-weight: 600; margin: 2rem 0 0.75rem; }
+  .prose h3 { color: var(--text-primary); font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+  .prose p { line-height: 1.75; margin-bottom: 1.25rem; }
+  .prose ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 1.25rem; }
+  .prose li { margin-bottom: 0.4rem; line-height: 1.7; }
+  .prose a { color: var(--accent); text-decoration: underline; }
+  .prose code { background: rgba(255,255,255,0.07); padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.85em; }
+  .prose strong { color: var(--text-primary); font-weight: 600; }
+  .prose blockquote { border-left: 3px solid var(--accent); padding-left: 1rem; opacity: 0.8; }
+</style>

@@ -1,0 +1,56 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/global.css';
+
+// Get all blog posts
+const posts = await Astro.glob('./*.md');
+const sorted = posts.sort((a, b) => 
+  new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
+);
+---
+
+<Base
+  title="Blog — Nexus by AiForStartups"
+  description="Insights on AI agents, ecommerce operations, MCP servers, and building agent-native SaaS."
+  canonical="https://aiforstartups.io/blog"
+>
+  <Nav />
+  <main class="min-h-screen pt-32 pb-24">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+
+      <div class="mb-14">
+        <span class="section-eyebrow mb-6 inline-block">Blog</span>
+        <h1 class="section-title mb-4">Thoughts on AI, agents & ecommerce ops</h1>
+        <p class="section-body">
+          Building in the open from Cairo. Sharing what we learn about AI agents, MCP, and the future of SaaS.
+        </p>
+      </div>
+
+      <div class="space-y-8">
+        {sorted.map((post) => (
+          <article class="reveal">
+            <a href={`/blog/${post.frontmatter.slug}`} class="group block p-6 rounded-2xl transition-colors"
+              style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-dim);"
+              onmouseover="this.style.borderColor='rgba(79,142,247,0.3)'"
+              onmouseout="this.style.borderColor='var(--border-dim)'">
+              <div class="flex items-center gap-3 mb-3">
+                <time class="text-xs" style="color: var(--text-muted);">{post.frontmatter.date}</time>
+                {post.frontmatter.tags?.map((tag: string) => (
+                  <span class="text-xs px-2 py-0.5 rounded-full"
+                    style="background: rgba(79,142,247,0.1); color: var(--accent);">{tag}</span>
+                ))}
+              </div>
+              <h2 class="text-xl font-semibold mb-2 group-hover:text-accent transition-colors"
+                style="color: var(--text-primary);">{post.frontmatter.title}</h2>
+              <p class="text-sm" style="color: var(--text-secondary);">{post.frontmatter.description}</p>
+            </a>
+          </article>
+        ))}
+      </div>
+
+    </div>
+  </main>
+  <Footer />
+</Base>

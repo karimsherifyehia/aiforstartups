@@ -7,8 +7,8 @@ interface Props {
 }
 
 const {
-  title = 'Nexus — Ops OS for E-commerce | Orders, WhatsApp, CRM, Shipping',
-  description = 'Nexus unifies orders, inventory, WhatsApp, CRM, and shipping for e-commerce teams in MENA. Free plan available. Go live in a week.',
+  title = 'Nexus — AI-Native Ops OS for Ecommerce | Orders, CRM, WhatsApp, Shipping',
+  description = 'Nexus unifies orders, inventory, WhatsApp, CRM, and shipping for ecommerce teams. Built for humans and AI agents. Free plan available.',
   ogImage = 'https://aiforstartups.io/og-image.png',
   canonical = 'https://aiforstartups.io/',
 } = Astro.props;
@@ -17,16 +17,16 @@ const structuredData = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "Nexus",
-  "description": "Multi-tenant Ops OS for e-commerce SMEs in MENA. Unifies orders, inventory, WhatsApp, CRM, and shipping.",
+  "description": "AI-native Ops OS for ecommerce. Unifies orders, inventory, WhatsApp, CRM, and shipping. Built for humans and AI agents.",
   "url": "https://aiforstartups.io",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "Web",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD",
-    "description": "Free plan available"
-  },
+  "offers": [
+    { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD" },
+    { "@type": "Offer", "name": "Starter", "price": "99", "priceCurrency": "USD" },
+    { "@type": "Offer", "name": "Growth", "price": "199", "priceCurrency": "USD" },
+    { "@type": "Offer", "name": "Scale", "price": "599", "priceCurrency": "USD" }
+  ],
   "author": {
     "@type": "Organization",
     "name": "AiForStartups",
@@ -44,12 +44,12 @@ const structuredData = {
 
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="keywords" content="ops os, e-commerce operations, whatsapp crm, order management egypt, inventory management mena, shopify integration, pick and pack, shipping tracking" />
+    <meta name="keywords" content="ecommerce ops software, ai agent saas, order management system, whatsapp crm, inventory management, mcp server ecommerce, shopify operations, fulfillment software, omnichannel messaging" />
     <link rel="canonical" href={canonical} />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Nexus — The fastest path from chaos to shipped" />
-    <meta property="og:description" content="Unify orders, inventory, WhatsApp, and shipping in one place. Free plan available." />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:url" content={canonical} />
     <meta property="og:type" content="website" />
@@ -58,26 +58,26 @@ const structuredData = {
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Nexus — Ops OS for E-commerce" />
-    <meta name="twitter:description" content="Unify orders, inventory, WhatsApp, and shipping in one place." />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:site" content="@aiforstartups" />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Outfit font — modern grotesque, not Inter -->
+    <!-- Outfit font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="preload" as="style"
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" as="style"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet" />
 
     <!-- AI agent discoverability -->
     <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
+
+    <!-- Google Analytics GA4 — replace G-XXXXXXXXXX with your Measurement ID -->
+    <!-- GA_PLACEHOLDER: add your GA4 ID here -->
 
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
@@ -86,8 +86,6 @@ const structuredData = {
   </head>
   <body>
     <slot />
-
-    <!-- Scroll-entry IntersectionObserver -->
     <script>
       const io = new IntersectionObserver(
         (entries) => {
