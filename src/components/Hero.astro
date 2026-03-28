@@ -1,189 +1,484 @@
 ---
+const screens = [
+  { tab: 'CRM',         src: '/screenshots/crm-overview.png',  label: 'Customer Management' },
+  { tab: 'Inbox',       src: '/screenshots/inbox.png',          label: 'Omnichannel Inbox' },
+  { tab: 'Analytics',   src: '/screenshots/analytics.png',      label: 'Analytics' },
+  { tab: 'Pick & Pack', src: '/screenshots/pickpack.png',        label: 'Fulfillment' },
+];
+
+const icons = [
+  {
+    id: 'whatsapp',
+    label: 'WhatsApp',
+    color: '#25d366',
+    bg: 'rgba(37,211,102,0.12)',
+    border: 'rgba(37,211,102,0.25)',
+    pos: 'top:18%; left:-5.5rem;',
+    delay: '0s',
+    speed: '6s',
+    svg: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>`,
+  },
+  {
+    id: 'facebook',
+    label: 'Facebook',
+    color: '#1877f2',
+    bg: 'rgba(24,119,242,0.12)',
+    border: 'rgba(24,119,242,0.25)',
+    pos: 'top:14%; right:-5.5rem;',
+    delay: '1.5s',
+    speed: '7s',
+    svg: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>`,
+  },
+  {
+    id: 'instagram',
+    label: 'Instagram',
+    color: '#e1306c',
+    bg: 'rgba(225,48,108,0.10)',
+    border: 'rgba(225,48,108,0.22)',
+    pos: 'bottom:30%; left:-5rem;',
+    delay: '0.8s',
+    speed: '8s',
+    svg: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>`,
+  },
+  {
+    id: 'shopify',
+    label: 'Shopify',
+    color: '#95bf47',
+    bg: 'rgba(149,191,71,0.10)',
+    border: 'rgba(149,191,71,0.22)',
+    pos: 'top:42%; right:-5.5rem;',
+    delay: '2.2s',
+    speed: '9s',
+    svg: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.337.6s-.275.077-.738.217c-.044-.14-.108-.294-.19-.451C14.023-.297 13.373-.32 13.12.104c0 0-.364.109-.9.272C11.604.012 10.93-.196 10.15.194 8.7.896 7.935 2.79 7.666 4.007c-.815.253-1.39.43-1.43.443-.445.14-.458.153-.516.573-.044.31-1.18 9.094-1.18 9.094l9.45 1.776V.55c-.22.015-.435.033-.653.05zM9.48 13.547l-.09.018c-.098-.443-.274-.82-.47-1.09.46.04.784.302.954.636L9.48 13.547zM12.76.627c-.01.005-.77.238-1.59.492.153-.588.448-1.17.964-1.508.2.273.388.69.626 1.016zm-1.11-.97c.168 0 .315.04.448.108-.494.37-.856 1.003-1.02 1.7l-1.316.408C9.99.614 11.1-.343 11.65-.343z"/></svg>`,
+  },
+  {
+    id: 'shipping',
+    label: 'Shipping',
+    color: '#f97316',
+    bg: 'rgba(249,115,22,0.10)',
+    border: 'rgba(249,115,22,0.22)',
+    pos: 'bottom:14%; left:-4.5rem;',
+    delay: '3s',
+    speed: '7.5s',
+    svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>`,
+  },
+  {
+    id: 'analytics',
+    label: 'Analytics',
+    color: '#a78bfa',
+    bg: 'rgba(167,139,250,0.10)',
+    border: 'rgba(167,139,250,0.22)',
+    pos: 'bottom:18%; right:-5rem;',
+    delay: '1s',
+    speed: '8.5s',
+    svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>`,
+  },
+];
 ---
 
-<section class="relative min-h-[100dvh] flex items-center pt-32 pb-20 overflow-hidden">
+<section class="relative min-h-[100dvh] flex flex-col items-center justify-center pt-28 pb-16 overflow-visible">
 
-  <!-- Ambient background orbs — fixed, GPU-accelerated -->
-  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
-    <div class="absolute" style="
-      top: -10%;
-      right: -5%;
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(79,142,247,0.07) 0%, transparent 70%);
-      filter: blur(1px);
-    "></div>
-    <div class="absolute" style="
-      bottom: 0;
-      left: -10%;
-      width: 500px;
-      height: 500px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(79,142,247,0.04) 0%, transparent 70%);
-      filter: blur(1px);
-    "></div>
+  <!-- Background glow orbs -->
+  <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+    <div class="abs-orb" style="top:-15%;left:50%;transform:translateX(-50%);width:900px;height:600px;background:radial-gradient(ellipse,rgba(79,142,247,0.10) 0%,transparent 65%);filter:blur(2px);"></div>
+    <div class="abs-orb" style="top:55%;left:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(79,142,247,0.06) 0%,transparent 70%);"></div>
+    <div class="abs-orb" style="top:50%;right:-8%;width:450px;height:450px;background:radial-gradient(circle,rgba(167,139,250,0.05) 0%,transparent 70%);"></div>
   </div>
 
-  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 w-full">
-    <div class="grid lg:grid-cols-[1fr_1.1fr] gap-16 items-center">
+  <!-- ── Centered copy ─────────────────────────────────────────── -->
+  <div class="relative z-10 flex flex-col items-center text-center px-4 mb-12 reveal">
 
-      <!-- Left — Copy -->
-      <div class="reveal">
+    <!-- Eyebrow -->
+    <div class="mb-6">
+      <span class="section-eyebrow">
+        <span class="w-1.5 h-1.5 rounded-full" style="background:var(--accent);box-shadow:0 0 6px var(--accent);"></span>
+        AI-Native Ops OS for Ecommerce
+      </span>
+    </div>
 
-        <!-- Eyebrow -->
-        <div class="mb-7">
-          <span class="section-eyebrow">
-            <span class="w-1.5 h-1.5 rounded-full" style="background: var(--accent); box-shadow: 0 0 6px var(--accent);"></span>
-            AI-Native Ops OS for Ecommerce
-          </span>
+    <!-- Headline -->
+    <h1 class="display-xl mb-6" style="max-width:18ch;color:var(--text-primary);">
+      Run every operation.<br/>
+      <span style="background:linear-gradient(135deg,#4f8ef7 0%,#a78bfa 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">One platform.</span>
+    </h1>
+
+    <!-- Sub -->
+    <p class="section-body mb-9" style="max-width:54ch;">
+      Nexus unifies orders, inventory, WhatsApp, Facebook, shipping, and CRM so your team stops switching tabs and starts shipping faster.
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-wrap justify-center items-center gap-3">
+      <a href="https://wa.me/201040003090" class="btn-primary" target="_blank" rel="noopener noreferrer">
+        Book a demo
+        <span class="btn-icon">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
+          </svg>
+        </span>
+      </a>
+      <a href="https://wa.me/201040003090" class="btn-ghost" target="_blank" rel="noopener noreferrer">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="color:#25d366;" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+        </svg>
+        WhatsApp us
+      </a>
+    </div>
+  </div>
+
+  <!-- ── Product showcase ──────────────────────────────────────── -->
+  <div class="relative z-10 w-full max-w-5xl px-4 sm:px-8 reveal" style="transition-delay:150ms;">
+    <div class="product-shell" style="position:relative;">
+
+      <!-- Floating integration icons -->
+      {icons.map((ic) => (
+        <div
+          class="float-icon"
+          style={`position:absolute;${ic.pos}animation:floatIcon ${ic.speed} ease-in-out infinite alternate;animation-delay:${ic.delay};`}
+          aria-label={ic.label}
+          title={ic.label}
+        >
+          <div
+            style={`width:3rem;height:3rem;border-radius:0.875rem;background:${ic.bg};border:1px solid ${ic.border};display:flex;align-items:center;justify-content:center;color:${ic.color};box-shadow:0 8px 24px rgba(0,0,0,0.35);`}
+          >
+            <span style="width:1.25rem;height:1.25rem;display:flex;align-items:center;" set:html={ic.svg} />
+          </div>
+          <span class="float-label" style={`font-size:0.6rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:${ic.color};text-align:center;margin-top:0.25rem;display:block;opacity:0.8;`}>{ic.label}</span>
+        </div>
+      ))}
+
+      <!-- Decorative SVG connector curves -->
+      <svg class="connector-svg" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;">
+        <!-- WhatsApp → left edge -->
+        <path class="connector-path" d="M -60,28% Q -20,30% 0,35%" style="stroke:rgba(37,211,102,0.3);" />
+        <!-- Facebook → right edge -->
+        <path class="connector-path" d="M 100%+60,22% Q 100%+20,28% 100%,30%" style="stroke:rgba(24,119,242,0.3);" />
+        <!-- Instagram → left edge -->
+        <path class="connector-path" d="M -60,65% Q -20,62% 0,60%" style="stroke:rgba(225,48,108,0.25);" />
+      </svg>
+
+      <!-- Main browser window -->
+      <div class="browser-frame">
+
+        <!-- Chrome bar -->
+        <div class="browser-chrome">
+          <div class="traffic-lights">
+            <div style="width:10px;height:10px;border-radius:50%;background:#ff5f57;"></div>
+            <div style="width:10px;height:10px;border-radius:50%;background:#febc2e;"></div>
+            <div style="width:10px;height:10px;border-radius:50%;background:#28c840;"></div>
+          </div>
+
+          <!-- Tab bar -->
+          <div class="tab-bar" id="tab-bar">
+            {screens.map((s, i) => (
+              <button
+                class={`screen-tab ${i === 0 ? 'active' : ''}`}
+                data-index={i}
+                aria-label={`Switch to ${s.label}`}
+              >
+                {s.tab}
+              </button>
+            ))}
+          </div>
+
+          <div class="url-bar">nexus.aiforstartups.io</div>
         </div>
 
-        <!-- Headline -->
-        <h1 class="display-xl mb-7" style="color: var(--text-primary); max-width: 14ch;">
-          The fastest path from
-          <span class="text-accent"> chaos</span>
-          <br/>to shipped.
-        </h1>
-
-        <!-- Sub -->
-        <p class="section-body mb-10" style="max-width: 44ch;">
-          Unify orders, inventory, WhatsApp, and shipping in one place—then layer CRM, campaigns, and AI insights when you're ready.
-        </p>
-
-        <!-- CTAs -->
-        <div class="flex flex-wrap items-center gap-3 mb-12">
-          <a
-            href="https://wa.me/201040003090"
-            class="btn-primary"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Book a demo
-            <span class="btn-icon">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
-              </svg>
-            </span>
-          </a>
-          <a
-            href="https://wa.me/201040003090"
-            class="btn-ghost"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="color: #25d366;" aria-hidden="true">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
-            </svg>
-            WhatsApp us
-          </a>
-        </div>
-
-        <!-- Stat pills -->
-        <div class="flex flex-wrap gap-2">
-          {[
-            { label: 'Pick & Pack', stat: '30–60 min saved daily' },
-            { label: 'Customers 2.0', stat: 'RFM · churn · LTV' },
-            { label: 'Growth', stat: 'Campaigns & analytics' },
-          ].map((item) => (
-            <div
-              class="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-medium"
-              style="background: var(--bg-surface); border: 1px solid var(--border-dim);"
-            >
-              <span style="color: var(--accent);">✦</span>
-              <span style="color: var(--text-primary);">{item.label}</span>
-              <span style="color: var(--text-tertiary);">·</span>
-              <span style="color: var(--text-secondary);">{item.stat}</span>
-            </div>
+        <!-- Screenshot area -->
+        <div class="screenshot-area" id="screenshot-area" style="position:relative;background:#0c0c14;overflow:hidden;">
+          {screens.map((s, i) => (
+            <img
+              src={s.src}
+              alt={s.label}
+              class={`screenshot-img ${i === 0 ? 'active' : ''}`}
+              data-index={i}
+              loading={i === 0 ? 'eager' : 'lazy'}
+              width="1200"
+              height="750"
+            />
           ))}
+
+          <!-- Animated notification cards -->
+          <div class="notif-card notif-left" id="notif-wa" aria-live="polite">
+            <div class="notif-icon" style="background:rgba(37,211,102,0.15);border:1px solid rgba(37,211,102,0.25);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+            </div>
+            <div>
+              <p class="notif-title">3 new WhatsApp messages</p>
+              <p class="notif-sub">Ahmed, Sara, Mohamed...</p>
+            </div>
+          </div>
+
+          <div class="notif-card notif-right" id="notif-order" aria-live="polite">
+            <div class="notif-icon" style="background:rgba(79,142,247,0.15);border:1px solid rgba(79,142,247,0.25);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4f8ef7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+              </svg>
+            </div>
+            <div>
+              <p class="notif-title">New order #4821</p>
+              <p class="notif-sub">Cairo · 3 items · 850 EGP</p>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <!-- Right — product visual in double-bezel frame -->
-      <div class="reveal" style="transition-delay: 120ms;">
-        <div class="bezel-card">
-          <div class="bezel-inner">
-            <!-- Browser chrome bar -->
-            <div
-              class="flex items-center gap-2 px-4 py-2.5"
-              style="background: rgba(8,8,13,0.9); border-bottom: 1px solid var(--border-dim);"
-            >
-              <div class="flex gap-1.5">
-                <div class="w-2.5 h-2.5 rounded-full" style="background: #ff5f57;"></div>
-                <div class="w-2.5 h-2.5 rounded-full" style="background: #febc2e;"></div>
-                <div class="w-2.5 h-2.5 rounded-full" style="background: #28c840;"></div>
-              </div>
-              <div
-                class="flex-1 mx-3 h-5 rounded-full flex items-center justify-center text-xs"
-                style="background: rgba(255,255,255,0.04); color: var(--text-tertiary); font-family: monospace; letter-spacing: 0;"
-              >
-                nexus.aiforstartups.io
-              </div>
-            </div>
-
-            <!-- Video / screenshot -->
-            <div class="relative" style="aspect-ratio: 16/10;">
-              <video
-                autoplay muted loop playsinline preload="none"
-                poster="/screenshots/crm-overview.png"
-                class="w-full h-full object-cover"
-                aria-label="Nexus dashboard demo"
-              >
-                <source src="/videos/inbox-demo.mp4" type="video/mp4" />
-              </video>
-              <!-- Placeholder when no video loaded -->
-              <div
-                class="absolute inset-0 flex flex-col items-center justify-center gap-3"
-                style="background: linear-gradient(145deg, #0c0c14, #111119);"
-                id="hero-placeholder"
-              >
-                <div class="relative">
-                  <!-- Pulsing ring -->
-                  <div class="absolute inset-0 rounded-full animate-ping" style="background: rgba(79,142,247,0.15);"></div>
-                  <div
-                    class="relative w-14 h-14 rounded-full flex items-center justify-center"
-                    style="background: rgba(79,142,247,0.1); border: 1px solid rgba(79,142,247,0.2);"
-                  >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <polygon points="5 3 19 12 5 21 5 3"/>
-                    </svg>
-                  </div>
-                </div>
-                <p class="text-xs" style="color: var(--text-tertiary);">Product video placeholder</p>
-              </div>
-            </div>
+      <!-- Bottom stat strip -->
+      <div class="stat-strip">
+        {[
+          { label: 'Orders today',    value: '247',   delta: '↑18%', color: '#4ade80' },
+          { label: 'Fulfillment rate',value: '98.2%', delta: '↑2.1%', color: '#4ade80' },
+          { label: 'Avg response',    value: '4 min', delta: '↓62%',  color: '#4ade80' },
+          { label: 'Active customers',value: '1,840', delta: '+34',    color: '#60a5fa' },
+        ].map((s) => (
+          <div class="stat-pill">
+            <span class="stat-label">{s.label}</span>
+            <span class="stat-value">{s.value}</span>
+            <span class="stat-delta" style={`color:${s.color};`}>{s.delta}</span>
           </div>
-        </div>
-
-        <!-- Floating metric card -->
-        <div
-          class="absolute -bottom-5 -left-6 flex items-center gap-3 px-4 py-2.5 rounded-xl z-10"
-          style="
-            background: var(--bg-card);
-            border: 1px solid var(--border-mid);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-          "
-        >
-          <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: rgba(34,197,94,0.1);">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>
-            </svg>
-          </div>
-          <div>
-            <p class="text-xs" style="color: var(--text-secondary);">Orders today</p>
-            <p class="text-base font-bold number-tabular" style="color: var(--text-primary);">247 <span class="text-xs font-normal" style="color: #4ade80;">↑18%</span></p>
-          </div>
-        </div>
+        ))}
       </div>
 
     </div>
   </div>
+
 </section>
 
-<script>
-  const video = document.querySelector('#hero-placeholder')?.previousElementSibling as HTMLVideoElement | null;
-  const placeholder = document.getElementById('hero-placeholder');
-  if (video && placeholder) {
-    video.addEventListener('playing', () => { placeholder.style.display = 'none'; });
+<!-- ── Styles ─────────────────────────────────────────────────── -->
+<style>
+  .abs-orb { position:absolute; pointer-events:none; }
+
+  /* ── Float icons ── */
+  .float-icon {
+    z-index: 20;
+    display: none; /* hidden on mobile */
   }
+  @media (min-width: 900px) {
+    .float-icon { display: block; }
+  }
+
+  @keyframes floatIcon {
+    0%   { transform: translateY(0px) rotate(-1deg); }
+    100% { transform: translateY(-14px) rotate(1deg); }
+  }
+
+  /* ── Connector SVG ── */
+  .connector-svg { display:none; }
+  @media (min-width: 900px) { .connector-svg { display:block; } }
+
+  .connector-path {
+    fill: none;
+    stroke-width: 1.5;
+    stroke-dasharray: 6 4;
+    opacity: 0.6;
+  }
+
+  /* ── Browser frame ── */
+  .browser-frame {
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.09);
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.04),
+      0 24px 80px rgba(0,0,0,0.65),
+      0 0 120px rgba(79,142,247,0.07);
+  }
+
+  .browser-chrome {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 1rem;
+    background: rgba(10,10,16,0.97);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .traffic-lights {
+    display: flex;
+    gap: 0.375rem;
+    flex-shrink: 0;
+  }
+
+  .tab-bar {
+    display: flex;
+    gap: 0.25rem;
+    flex: 1;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+
+  .screen-tab {
+    padding: 0.3rem 0.85rem;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: rgba(255,255,255,0.35);
+    transition: all 0.2s;
+    letter-spacing: 0.01em;
+  }
+  .screen-tab:hover { color: rgba(255,255,255,0.65); background: rgba(255,255,255,0.04); }
+  .screen-tab.active {
+    color: var(--text-primary);
+    background: rgba(79,142,247,0.14);
+    border: 1px solid rgba(79,142,247,0.22);
+  }
+
+  .url-bar {
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.65rem;
+    font-family: monospace;
+    color: rgba(255,255,255,0.28);
+    background: rgba(255,255,255,0.04);
+    white-space: nowrap;
+    flex-shrink: 0;
+    display: none;
+  }
+  @media (min-width: 640px) { .url-bar { display: block; } }
+
+  /* ── Screenshots ── */
+  .screenshot-area {
+    aspect-ratio: 16 / 9;
+  }
+
+  .screenshot-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+  .screenshot-img.active { opacity: 1; }
+
+  /* ── Notification cards ── */
+  .notif-card {
+    position: absolute;
+    bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.6rem 0.9rem;
+    border-radius: 0.75rem;
+    background: rgba(14,14,22,0.92);
+    border: 1px solid rgba(255,255,255,0.09);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.5);
+    pointer-events: none;
+    transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.5s ease;
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  .notif-card.visible { opacity: 1; transform: translateY(0); }
+
+  .notif-left  { left: 1rem; }
+  .notif-right { right: 1rem; }
+
+  .notif-icon {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .notif-title {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.2;
+    margin: 0;
+  }
+  .notif-sub {
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  /* ── Stat strip ── */
+  .stat-strip {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+  }
+
+  .stat-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 1rem;
+    border-radius: 9999px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-dim);
+    font-size: 0.72rem;
+  }
+
+  .stat-label { color: var(--text-tertiary); }
+  .stat-value { color: var(--text-primary); font-weight: 700; font-variant-numeric: tabular-nums; }
+  .stat-delta { font-weight: 600; font-size: 0.65rem; }
+</style>
+
+<!-- ── Script ─────────────────────────────────────────────────── -->
+<script>
+  const screens = document.querySelectorAll<HTMLImageElement>('.screenshot-img');
+  const tabs    = document.querySelectorAll<HTMLButtonElement>('.screen-tab');
+  let current   = 0;
+  let timer: ReturnType<typeof setInterval>;
+
+  function switchTo(idx: number) {
+    screens[current].classList.remove('active');
+    tabs[current].classList.remove('active');
+    current = idx;
+    screens[current].classList.add('active');
+    tabs[current].classList.add('active');
+  }
+
+  function advance() {
+    switchTo((current + 1) % screens.length);
+  }
+
+  function resetTimer() {
+    clearInterval(timer);
+    timer = setInterval(advance, 4000);
+  }
+
+  tabs.forEach((btn, i) => {
+    btn.addEventListener('click', () => {
+      switchTo(i);
+      resetTimer();
+    });
+  });
+
+  timer = setInterval(advance, 4000);
+
+  // Notification cards
+  function showNotif(id: string, delayMs: number, holdMs: number) {
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.add('visible');
+      setTimeout(() => el.classList.remove('visible'), holdMs);
+    }, delayMs);
+  }
+
+  // WA notif: appear at 1.5s, stay 4s, then repeat every 14s
+  function cycleNotif(id: string, startMs: number, holdMs: number, intervalMs: number) {
+    showNotif(id, startMs, holdMs);
+    setInterval(() => showNotif(id, 0, holdMs), intervalMs);
+  }
+
+  cycleNotif('notif-wa',    1500, 4000, 14000);
+  cycleNotif('notif-order', 4500, 4000, 14000);
 </script>
