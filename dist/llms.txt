@@ -1,25 +1,50 @@
-# Nexus by AiForStartups
+# AiForStartups — AI For Startups
 
-> Nexus is a multi-tenant Ops OS for e-commerce SMEs in MENA. It unifies omnichannel messaging, CRM, order fulfillment, inventory, shipping, VoIP, and AI analytics.
+> AI automation & SaaS company. Main product: Nexus, an agent-native Ops OS for ecommerce.
 
-## Documentation
-- [Full Docs](https://nexus-docs.aiforstartups.io/)
-- [API Reference](https://nexus-docs.aiforstartups.io/api/)
-- [OpenAPI Spec](https://nexus-docs.aiforstartups.io/openapi.yaml)
-- [Agent Auth Guide](https://nexus-docs.aiforstartups.io/api/#authentication)
+## Company
 
-## Key Capabilities
-- Omnichannel inbox (WhatsApp, Facebook, Instagram)
-- Order management with Shopify/WooCommerce sync
-- Pick & Pack warehouse workflows with barcode scanning
-- CRM with RFM scoring, churn prediction, smart segments
-- Campaign builder (WhatsApp, Email, SMS)
-- Shipping & AWB tracking (Bosta integration)
-- VoIP call management (Issabel PBX)
-- AI-powered CS analytics, sentiment analysis, embeddings
+- Website: https://aiforstartups.io
+- Blog: https://aiforstartups.io/blog
+- Founded: 2025
+- Location: Cairo, Egypt
+
+## Main Product: Nexus
+
+Nexus is a multi-tenant operations platform for ecommerce and retail businesses.
+
+**App:** https://nexus.aiforstartups.io
+**Docs:** https://nexus-docs.aiforstartups.io
+**Agent docs:** https://nexus-docs.aiforstartups.io/api/ai-agents-mcp
+**Full llms.txt:** https://nexus-docs.aiforstartups.io/llms.txt
+**Full llms-full.txt:** https://nexus-docs.aiforstartups.io/llms-full.txt
+**OpenAPI spec:** https://nexus-docs.aiforstartups.io/openapi.yaml
+**MCP discovery:** https://nexus.aiforstartups.io/.well-known/mcp.json
+
+## Nexus Capabilities
+
+- CRM: contacts, companies, journey stages, customer 360
+- Order management: full lifecycle (pending → confirmed → fulfilling → shipped → delivered)
+- Inventory & warehousing: stock tracking, bins, cycle counts
+- Fulfillment: pick, pack, ship workflows
+- Shipping: AWB creation, courier integration, tracking
+- Omnichannel messaging: WhatsApp, Facebook Messenger, Instagram DMs
+- VoIP / PBX: click-to-call, CDR sync
+- AI analytics: sentiment, transcription, embeddings (Scale tier)
+- Automation: event-driven workflows
 
 ## For AI Agents
-- Authenticate via API keys: POST /functions/v1/agent-auth
-- Full CRUD on contacts, orders, inventory, messages
-- Scoped permissions per API key
-- See llms.txt on docs site: https://nexus-docs.aiforstartups.io/llms.txt
+
+Nexus is agent-native. Agents can self-register and operate without human intervention.
+
+- Register: POST https://lgwvoomgrwpsgpxwyaec.supabase.co/functions/v1/agent-register
+- Auth: POST https://lgwvoomgrwpsgpxwyaec.supabase.co/functions/v1/agent-auth
+- MCP: https://lgwvoomgrwpsgpxwyaec.supabase.co/functions/v1/mcp-server
+- Transport: Streamable HTTP (MCP 2025-03-26)
+
+## Pricing
+
+- Free ($0): read-only MCP, 50 contacts, 25 orders, 500 API calls/day
+- Starter ($99/mo): read+write MCP, 500 contacts, 200 orders/mo, 1K messages
+- Growth ($199/mo): full MCP, 5K contacts, unlimited orders, 5K messages, VoIP, automation
+- Scale ($599/mo): everything + AI suite, unlimited, custom integrations, SLA

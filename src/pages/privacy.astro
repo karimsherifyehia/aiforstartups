@@ -13,34 +13,110 @@ import '../styles/global.css';
   <Nav />
   <main class="max-w-3xl mx-auto px-4 sm:px-6 pt-32 pb-20">
     <h1 class="text-3xl font-bold text-white mb-2">Privacy Policy</h1>
-    <p class="text-sm mb-10" style="color: #8888a0;">Last updated: March 2025</p>
+    <p class="text-sm mb-10" style="color: #8888a0;">Last updated: March 28, 2026</p>
 
     <div class="space-y-8 text-sm leading-relaxed" style="color: #8888a0;">
+
       <section>
         <h2 class="text-lg font-semibold text-white mb-3">1. Introduction</h2>
-        <p>AiForStartups ("we", "our", "us") operates the Nexus platform. This Privacy Policy explains how we collect, use, and protect your information when you use our services.</p>
+        <p>AiForStartups ("we", "our", "us") operates the Nexus platform — an operations system for e-commerce and retail businesses. This Privacy Policy explains how we collect, use, and protect your information when you use our services, including integrations with third-party messaging platforms such as WhatsApp and Facebook.</p>
       </section>
 
       <section>
         <h2 class="text-lg font-semibold text-white mb-3">2. Information We Collect</h2>
-        <p>We collect information you provide directly (account details, business data), information generated through your use of the platform (order data, customer interactions), and technical data (IP addresses, device information, usage analytics).</p>
+        <p class="mb-3">We collect information you provide directly (account details, business data), information generated through your use of the platform (order data, customer interactions), and technical data (IP addresses, device information, usage analytics).</p>
+        <p>When you connect WhatsApp or Facebook integrations, we may also process:</p>
+        <ul class="list-disc ml-5 mt-2 space-y-1">
+          <li>Messages sent and received via WhatsApp Business API</li>
+          <li>Messages, comments, and interactions from your Facebook Page</li>
+          <li>Customer contact information shared through these channels</li>
+          <li>Media files (images, documents) exchanged in conversations</li>
+        </ul>
       </section>
 
       <section>
-        <h2 class="text-lg font-semibold text-white mb-3">3. Data Isolation</h2>
-        <p>Nexus is a multi-tenant platform. Your organization's data is isolated using PostgreSQL Row-Level Security and is completely invisible to other tenants. We do not share your data with other customers.</p>
+        <h2 class="text-lg font-semibold text-white mb-3">3. WhatsApp Integration</h2>
+        <p class="mb-3">Nexus integrates with the WhatsApp Business API (provided by Meta Platforms, Inc.) to allow you to send and receive messages with your customers. By enabling this integration, you acknowledge that:</p>
+        <ul class="list-disc ml-5 mt-2 space-y-1">
+          <li>Messages are processed through Meta's infrastructure and subject to <a href="https://www.whatsapp.com/legal/privacy-policy" class="text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">WhatsApp's Privacy Policy</a></li>
+          <li>You are responsible for obtaining necessary consent from your customers before messaging them</li>
+          <li>Message content is stored within our platform to support your customer service operations</li>
+          <li>We do not use your WhatsApp conversation data for advertising or share it with unauthorized third parties</li>
+        </ul>
       </section>
 
       <section>
-        <h2 class="text-lg font-semibold text-white mb-3">4. Data Security</h2>
-        <p>All data is encrypted in transit (TLS) and at rest. We implement industry-standard security practices and conduct regular security reviews.</p>
+        <h2 class="text-lg font-semibold text-white mb-3">4. Facebook Integration</h2>
+        <p class="mb-3">Nexus integrates with the Facebook Graph API (provided by Meta Platforms, Inc.) to allow you to manage communications from your Facebook Page. By enabling this integration, you acknowledge that:</p>
+        <ul class="list-disc ml-5 mt-2 space-y-1">
+          <li>Data is processed through Meta's infrastructure and subject to <a href="https://www.facebook.com/privacy/policy" class="text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Facebook's Privacy Policy</a></li>
+          <li>We access only the permissions you explicitly grant during the Facebook login flow</li>
+          <li>Page messages and interactions are stored within our platform to support your operations</li>
+          <li>You may revoke our access to your Facebook Page at any time through your Facebook settings</li>
+        </ul>
       </section>
 
       <section>
-        <h2 class="text-lg font-semibold text-white mb-3">5. Contact</h2>
-        <p>For privacy-related questions, contact us via <a href="https://wa.me/201040003090" class="text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">WhatsApp</a> or email at privacy@aiforstartups.io.</p>
-        <p class="mt-2 text-xs" style="color: #444458;"><!-- TODO: Complete full privacy policy with legal counsel --></p>
+        <h2 class="text-lg font-semibold text-white mb-3">5. Data Isolation</h2>
+        <p>Nexus is a multi-tenant platform. Your organization's data — including all messages and customer information from connected channels — is isolated using PostgreSQL Row-Level Security and is completely invisible to other tenants. We do not share your data with other customers.</p>
       </section>
+
+      <section>
+        <h2 class="text-lg font-semibold text-white mb-3">6. How We Use Your Data</h2>
+        <ul class="list-disc ml-5 space-y-1">
+          <li>To provide and operate the Nexus platform</li>
+          <li>To process customer communications on your behalf via connected channels</li>
+          <li>To generate analytics and reports for your business</li>
+          <li>To improve platform performance and reliability</li>
+          <li>To comply with legal obligations</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-semibold text-white mb-3">7. Data Retention</h2>
+        <p>We retain your data for as long as your account is active. Upon account termination, we will delete your data within 30 days, unless we are required to retain it for legal purposes. Message history from WhatsApp and Facebook integrations is retained for the duration of your subscription.</p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-semibold text-white mb-3">8. Data Security</h2>
+        <p>All data is encrypted in transit (TLS 1.2+) and at rest. We implement industry-standard security practices and conduct regular security reviews. However, no method of transmission over the internet is 100% secure.</p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-semibold text-white mb-3">9. Analytics</h2>
+        <p>We use Google Analytics and Microsoft Clarity to understand how visitors interact with our website. These services may collect information about your device, browser, and usage patterns. You can opt out of Google Analytics by installing the <a href="https://tools.google.com/dlpage/gaoptout" class="text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Google Analytics Opt-out Browser Add-on</a>.</p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-semibold text-white mb-3">10. Your Rights</h2>
+        <p>Depending on your location, you may have the right to access, correct, delete, or export your personal data. To exercise any of these rights, contact us using the details below.</p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-semibold text-white mb-3">11. Third-Party Services</h2>
+        <p>Our platform integrates with third-party services including Meta (WhatsApp & Facebook), Supabase, and DigitalOcean. Each of these services has their own privacy policies which govern their use of your data.</p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-semibold text-white mb-3">12. Children's Privacy</h2>
+        <p>Our services are not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13.</p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-semibold text-white mb-3">13. Changes to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time. We will notify you of any significant changes by posting the new policy on this page and updating the "Last updated" date.</p>
+      </section>
+
+      <section>
+        <h2 class="text-lg font-semibold text-white mb-3">14. Contact Us</h2>
+        <p class="mb-3">For privacy-related questions or to exercise your data rights:</p>
+        <ul class="list-none space-y-2">
+          <li>📧 <a href="mailto:info@aiforstartups.io" class="text-blue-400 hover:underline">info@aiforstartups.io</a></li>
+          <li>💬 <a href="https://wa.me/201040003090" class="text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">WhatsApp: +20 104 000 3090</a></li>
+          <li>📍 Cairo, Egypt</li>
+        </ul>
+      </section>
+
     </div>
   </main>
   <Footer />
